@@ -1,6 +1,7 @@
 ﻿var Round = 1;
 var Clone : GameObject;
 var RN : UI.Text;
+var Flap : AudioClip;
 function Start () {
 
 }
@@ -10,6 +11,16 @@ transform.Translate(Vector2.left * (Time.deltaTime * (Round + 1) ));
 	if (Input.GetKeyDown("space")) {
 	GetComponent.<Rigidbody2D>().AddForce(Vector2(0,250));
 	GetComponent.<Animator>().SetTrigger("Fly");
+	if (GetComponent.<AudioSource>().isPlaying == false) {
+	GetComponent.<AudioSource>().PlayOneShot(Flap);
+	}
+	}
+	if (Input.touchCount > 0)  {
+	GetComponent.<Rigidbody2D>().AddForce(Vector2(0,30));
+	GetComponent.<Animator>().SetTrigger("Fly");
+	if (GetComponent.<AudioSource>().isPlaying == false) {
+	GetComponent.<AudioSource>().PlayOneShot(Flap);
+	}
 	}
 	RN.text = Round.ToString();
 }
